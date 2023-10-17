@@ -1,0 +1,107 @@
+package Myclnq.com;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.Select;
+
+public class MyCLNQ {
+	
+	static WebDriver driver;
+//	static Select select;
+	static String WEB_URL = "https://myclnq.co/stage/provider/#/";
+	static String USER_NAME = "Vikram_123";
+	static String PASS_WORD = "Vikram@123";
+	static int sleepTimer = 3000;
+	
+	public static void initDriver() {
+		try {
+			System.setProperty("webdriver.chrome.driver", "C:\\Selenium\\chromedriver-win64\\chromedriver-win64\\chromedriver.exe");
+			driver = new ChromeDriver();
+			driver.manage().window().maximize();
+			driver.get(WEB_URL);
+
+			System.out.println("Website opened successfully");
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static void sleep(int timer) {
+		try {
+			Thread.sleep(timer);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+	}
+	public static void clickDoctorBtn() {
+		
+			sleep(sleepTimer);
+			driver.findElement(By.xpath(MyCLNQ_Locator.DOCTOR_BTN_PATH)).click();	
+			System.out.println("Doctor BTN Clicked Successfully");
+	}
+		
+	public static void login() {
+		
+		sleep(sleepTimer);	
+		driver.findElement(By.xpath(MyCLNQ_Locator.USER_NAME_PATH)).sendKeys(USER_NAME);
+		sleep(sleepTimer);	
+		driver.findElement(By.xpath(MyCLNQ_Locator.PASS_WORD_PATH)).sendKeys(PASS_WORD);
+		driver.findElement(By.xpath(MyCLNQ_Locator.LOGIN_BTN_PATH)).click();	
+		System.out.println("Logined Successfully");
+		
+		}
+	public static void clickAppointmentMenuBtn() {
+		
+		sleep(sleepTimer);
+		driver.findElement(By.xpath(MyCLNQ_Locator.APPOINTMENT_MENU_PATH)).click();	
+		sleep(sleepTimer);
+		driver.findElement(By.xpath(MyCLNQ_Locator.CREATE_APPOINTMENT_PATH)).click();
+		sleep(sleepTimer);
+		driver.findElement(By.xpath(MyCLNQ_Locator.NUMBER_PATH)).sendKeys("98087989");
+		sleep(sleepTimer);
+		driver.findElement(By.xpath(MyCLNQ_Locator.FIRSTNAME_PATH)).sendKeys("Adhi");				
+		sleep(sleepTimer);
+		driver.findElement(By.xpath(MyCLNQ_Locator.LASTNAME_PATH)).sendKeys("Raj");
+		sleep(sleepTimer);
+		driver.findElement(By.xpath(MyCLNQ_Locator.DOB_PATH)).sendKeys("22-06-1985");
+		sleep(sleepTimer);
+		driver.findElement(By.xpath(MyCLNQ_Locator.GENDER_PATH2)).click();
+		sleep(sleepTimer);
+		driver.findElement(By.xpath(MyCLNQ_Locator.ADDRESS_PATH)).sendKeys("20 Ang Mo Kio Industrial Park 2A 04-18");
+		sleep(sleepTimer);
+		driver.findElement(By.xpath(MyCLNQ_Locator.SYMPTOMS_PATH)).click();
+		sleep(sleepTimer);
+		driver.findElement(By.xpath(MyCLNQ_Locator.SCHEDULE_DATE_PATH)).sendKeys("06-23-2023");
+		sleep(sleepTimer);
+		WebElement ddown = driver.findElement(By.xpath(MyCLNQ_Locator.HOUR_PATH));
+		Select select = new Select(ddown);
+		select.getOptions();
+		driver.findElement(By.xpath(MyCLNQ_Locator.SUBMIT_PATH)).click();
+		
+		System.out.println("Appointment created Successfully");
+}
+	
+	public static void main(String[] args) throws InterruptedException 
+	{
+			//Initializing selenium web driver.
+				initDriver();
+			
+			//Testing Clicking Doctor button.
+				clickDoctorBtn();
+				
+			//Testing login using username and password.
+				login();
+			
+				//Testing Clicking Appointment Menu button.
+				clickAppointmentMenuBtn();
+		
+				
+				
+	}
+}
+
+
+

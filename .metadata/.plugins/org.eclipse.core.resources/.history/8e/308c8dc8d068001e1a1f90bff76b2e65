@@ -1,0 +1,8 @@
+package tests;
+
+public class FunctionalTests {
+	public static void main(String[] args) {
+		test4
+	}
+}
+

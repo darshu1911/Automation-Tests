@@ -1,0 +1,169 @@
+package tests;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.remote.RemoteWebElement;
+import org.testng.annotations.Test;
+
+import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.Status;
+import com.google.common.collect.ImmutableMap;
+
+import io.appium.java_client.AppiumBy;
+
+
+public class CreateAssetTest extends AstraTest{
+
+	@Test(priority = 2)
+	public void SkipWalkthrough() throws InterruptedException{
+		ExtentTest test2 = extent.createTest("SkipWalkthrough Test").assignAuthor("Darshan").assignCategory("Smoke Test").assignDevice("Android");
+		test2.log(Status.INFO, "Astra App Opened ");
+
+		Thread.sleep(3000);
+		driver.findElement(By.id("com.asset.management:id/skip")).click();
+		test2.pass("User Skipped Walkthrough Screens ");
+		System.out.println("Skipped Walkthrough screens");
+		Thread.sleep(1000);
+		driver.findElement(By.id("com.asset.management:id/emailId")).sendKeys(EMAIL_ID);
+		driver.findElement(By.id("com.asset.management:id/sent_otp_btn")).click();
+		Thread.sleep(2000);
+		driver.findElement(By.id("com.asset.management:id/edtxt1")).sendKeys("1");
+		driver.findElement(By.id("com.asset.management:id/edtxt2")).sendKeys("2");
+		driver.findElement(By.id("com.asset.management:id/edtxt3")).sendKeys("3");
+		driver.findElement(By.id("com.asset.management:id/edtxt4")).sendKeys("4");
+		Thread.sleep(1000);
+		driver.findElement(By.id("com.asset.management:id/submit_btn")).click();
+		test2.log(Status.PASS, "Logged In Succesfully");
+		test2.pass("Verified With valid OTP");
+
+		System.out.println("Logged In Succesfully");
+	}
+
+	@Test(priority = 3)
+	public void AddAssettest() throws InterruptedException {
+		ExtentTest test3 = extent.createTest("AddAsset Test").assignAuthor("Darshan").assignCategory("Smoke Test").assignDevice("Android");
+		test3.log(Status.INFO, "Home Page Displayed ");
+		Thread.sleep(4000);
+		driver.findElement(By.id("com.asset.management:id/add_Asset_btn")).click();
+		test3.log(Status.PASS, "Navigated To Add Asset Screen");
+		Thread.sleep(500);
+		driver.findElement(By.id("com.android.permissioncontroller:id/permission_allow_foreground_only_button")).click();
+		Thread.sleep(200);
+		driver.findElement(By.id("com.asset.management:id/aname")).sendKeys("MacBook");
+		Thread.sleep(200);
+		driver.findElement(By.id("com.asset.management:id/description")).sendKeys("No fuss meets high performance Stylish high performance business");
+		Thread.sleep(200);
+		driver.findElement(By.id("com.asset.management:id/brand")).sendKeys("Apple");
+		Thread.sleep(200);
+		driver.findElement(By.id("com.asset.management:id/price")).sendKeys("129000");
+		Thread.sleep(200);
+		driver.findElement(By.id("com.asset.management:id/date_purchase")).click();
+		Thread.sleep(500);
+		driver.findElement(By.id("android:id/date_picker_header_year")).click();
+		Thread.sleep(200);
+		driver.findElement(By.xpath("//android.widget.TextView[@text='2020']")).click();
+		Thread.sleep(200);
+		driver.findElement(By.xpath("//android.view.View[@content-desc=\"05 October 2020\"]")).click();
+		Thread.sleep(200);
+		driver.findElement(By.id("android:id/button1")).click();
+		Thread.sleep(200);
+		driver.findElement(By.id("com.asset.management:id/categoryButton")).click();
+		Thread.sleep(200);
+		driver.findElement(By.id("com.asset.management:id/electronic")).click();
+		Thread.sleep(200);
+		driver.findElement(By.id("com.asset.management:id/SubCategory")).sendKeys("Laptop");
+		Thread.sleep(200);
+		driver.findElement(By.id("com.asset.management:id/expectedAge")).sendKeys("1231");
+		Thread.sleep(500);
+		driver.findElement(AppiumBy.androidUIAutomator("new UiScrollable(new UiSelector()).scrollIntoView(text(\"Add asset image\"));"));
+		Thread.sleep(200);
+		driver.findElement(By.id("com.asset.management:id/select_img")).click();
+				Thread.sleep(200);
+				driver.findElement(By.id("com.asset.management:id/galleryButton")).click();
+				Thread.sleep(200);
+				driver.findElement(By.xpath("//android.widget.ImageView[@resource-id='com.google.android.documentsui:id/icon_thumb']")).click();
+//		Thread.sleep(500);
+//		driver.findElement(By.xpath("//android.widget.Button[@resource-id='com.asset.management:id/cameraButton']")).click();
+//		Thread.sleep(500);
+//		driver.findElement(By.xpath("//android.view.View[@content-desc=\"Shutter button\"]")).click();
+//		Thread.sleep(3000);
+//		driver.findElement(By.xpath("//android.widget.ImageView[@content-desc=\"Done\"]")).click();
+		Thread.sleep(1000);
+		driver.findElement(By.xpath("//android.widget.Button[@text='Add']")).click();
+		Thread.sleep(1000);
+//		driver.findElement(By.id("com.asset.management:id/btn_create")).click();
+		
+		test3.log(Status.PASS, "Asset created Succesfully");
+		test3.pass("User Created a Asset");
+
+		System.out.println("Asset created Succesfully");
+
+	}
+
+	@Test(priority = 4)
+	public void EditAsset() throws InterruptedException{
+		ExtentTest test5 = extent.createTest("EditAsset Test").assignAuthor("Darshan").assignCategory("Functional Test").assignDevice("Android");
+		test5.log(Status.INFO, "Home Page Displayed");
+		
+		Thread.sleep(1000);
+		driver.findElement(By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.view.ViewGroup/androidx.viewpager.widget.ViewPager/androidx.recyclerview.widget.RecyclerView/android.widget.FrameLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.LinearLayout/androidx.recyclerview.widget.RecyclerView/android.widget.GridLayout[1]/android.view.ViewGroup"));
+		Thread.sleep(300);
+		driver.findElement(By.id("com.asset.management:id/editButton")).click();
+		Thread.sleep(200);
+		driver.findElement(By.id("com.asset.management:id/aname")).sendKeys("HP ThinkPad");
+		Thread.sleep(200);
+		driver.findElement(By.xpath("com.asset.management:id/brand")).sendKeys("HP");
+		Thread.sleep(200);
+		driver.findElement(By.id("com.asset.management:id/expectedAge")).sendKeys("1523");
+		Thread.sleep(500);
+		driver.findElement(AppiumBy.androidUIAutomator("new UiScrollable(new UiSelector()).scrollIntoView(text(\"Add asset image\"));"));	
+		Thread.sleep(3000);
+		driver.findElement(By.id("com.asset.management:id/update_btn")).click();
+		test5.log(Status.PASS, "All fields entered");
+
+		test5.log(Status.PASS, "Asset edited Succesfully");
+		test5.pass("User edited asset to resource");
+		System.out.println("Asset edited Succesfully");
+
+		Thread.sleep(400);
+		driver.findElement(By.id("com.asset.management:id/backButtonDesc")).click();
+
+	}
+
+//	@Test(priority = 12)
+//	public void NotAssigned() throws InterruptedException {
+//		ExtentTest test12 = extent.createTest("NotAssigned").assignAuthor("Darshan").assignCategory("Functional").assignDevice("Android");
+//		test12.log(Status.INFO, "Home Page is Displayed");
+//
+//		Thread.sleep(500);
+//		driver.findElement(By.id("com.asset.management:id/overflowMenu")).click();
+//		Thread.sleep(200);
+//		driver.findElement(By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.ListView/android.widget.LinearLayout[4]/android.widget.LinearLayout/android.widget.RelativeLayout/android.widget.TextView")).click();
+//		test12.log(Status.INFO, "All assigned assets are Displayed");
+//
+//		Thread.sleep(200);
+//		driver.findElement(By.id("com.asset.management:id/clear_filter_btn")).click();		
+//
+//	}
+
+	//	
+	//	@Test(priority = 14)
+	//	public void Search() throws InterruptedException{
+	//		ExtentTest test14 = extent.createTest("Search Test").assignAuthor("Darshan").assignCategory("Functional Test").assignDevice("Android");
+	//		test14.log(Status.INFO, "Home Page Displayed");
+	//		Thread.sleep(1000);
+	//		driver.findElement(By.id("com.asset.management:id/fragment_search")).click();
+	//		Thread.sleep(200);
+	//		driver.findElement(By.id("com.asset.management:id/search_src_text")).sendKeys("Sam");
+	//		driver.getKeyboard().pressKey(Keys.ENTER);
+	//		test14.log(Status.PASS, "Assign revoked Succesfully");
+	//		test14.pass("User revoked assign");
+	//		System.out.println("Assign revoked Succesfully");
+	//
+	//		driver.findElement(By.id("com.asset.management:id/backButtonAssign")).click();
+	//		Thread.sleep(200);
+	//	}
+
+
+}

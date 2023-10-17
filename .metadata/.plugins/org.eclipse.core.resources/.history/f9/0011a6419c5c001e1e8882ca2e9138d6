@@ -1,0 +1,109 @@
+package MyCLNQ_Provider.com;
+
+import org.checkerframework.checker.units.qual.C;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.Select;
+import org.testng.annotations.AfterTest;
+
+public class Test {
+	
+	static WebDriver driver;
+//	static Select select;
+	static String WEB_URL = "https://myclnq.co/stage/provider/#/";
+	static String USER_NAME = "Vikram_123";
+	static String PASS_WORD = "Vikram@123";
+	static int sleepTimer = 3000;
+	
+	public static void initDriver() {
+		try {
+			System.setProperty("webdriver.chrome.driver", "C:\\Selenium\\chromedriver_win32\\chromedriver.exe");
+			driver = new ChromeDriver();
+			driver.manage().window().maximize();
+			driver.get(WEB_URL);
+
+			System.out.println("Website opened successfully");
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static void sleep(int timer) {
+		try {
+			Thread.sleep(timer);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+	}
+	public static void clickClinicBtn() {
+		
+			sleep(sleepTimer);
+			driver.findElement(By.xpath(CLINIC_LOCATOR.CLNIC_BTN_PATH)).click();	
+			System.out.println("Clinic BTN Clicked Successfully");
+	}
+		
+	public static void Cliniclogin() {
+		
+		sleep(sleepTimer);	
+		driver.findElement(By.xpath(CLINIC_LOCATOR.MobileNUMBER_PATH)).sendKeys("99012424");
+		sleep(sleepTimer);	
+		driver.findElement(By.xpath(CLINIC_LOCATOR.Continue_Btn_Path)).click();	
+		sleep(sleepTimer);	
+		driver.findElement(By.xpath(CLINIC_LOCATOR.Otp_Input_Path1)).sendKeys("7207");
+		sleep(sleepTimer);	
+		driver.findElement(By.xpath(CLINIC_LOCATOR.Verify_Btn_Path)).click();	
+		System.out.println("Logined Successfully");
+	}
+	
+		public static void generatemdcertificateBtn() {
+			sleep(sleepTimer);	
+			driver.findElement(By.xpath(CLINIC_LOCATOR.Appointments_Path)).click();
+			sleep(sleepTimer);	
+			driver.findElement(By.xpath(CLINIC_LOCATOR.Attend_Path)).click();
+			sleep(sleepTimer);	
+			driver.findElement(By.xpath(CLINIC_LOCATOR.Generate_Certificate_Path)).click();
+			sleep(sleepTimer);	
+			driver.findElement(By.xpath(CLINIC_LOCATOR.Certificat_Num_Path)).sendKeys("990122212424");
+			sleep(sleepTimer);	
+			driver.findElement(By.xpath(CLINIC_LOCATOR.Rmarks_Path)).sendKeys("99012424");
+			sleep(sleepTimer);	
+			driver.findElement(By.xpath(CLINIC_LOCATOR.FIN_Path)).sendKeys("99012424");
+			sleep(sleepTimer);	
+			driver.findElement(By.xpath(CLINIC_LOCATOR.Reference_Num_Path)).sendKeys("99012424");
+			sleep(sleepTimer);	
+			driver.findElement(By.xpath(CLINIC_LOCATOR.Used_For_Path2)).sendKeys("99012424");
+			sleep(sleepTimer);	
+			driver.findElement(By.xpath(CLINIC_LOCATOR.From_Path)).sendKeys("99012424");
+			sleep(sleepTimer);	
+			driver.findElement(By.xpath(CLINIC_LOCATOR.To_Path)).sendKeys("99012424");
+			sleep(sleepTimer);	
+			driver.findElement(By.xpath(CLINIC_LOCATOR.Cancel_Btn_Path)).sendKeys("99012424");
+			sleep(sleepTimer);	
+			driver.findElement(By.xpath(CLINIC_LOCATOR.Submit_Btn_Path)).sendKeys("99012424");
+
+		}
+//	
+	public static void main(String[] args) throws InterruptedException 
+	{
+			//Initializing selenium web driver.
+				initDriver();
+			
+			//Testing Clicking Doctor button.
+				clickClinicBtn();
+				
+			//Testing login using username and password.
+				Cliniclogin();
+			
+			//Testing Clicking Appointment Menu button.
+				generatemdcertificateBtn();
+		
+				
+				
+	}
+}
+
+
+

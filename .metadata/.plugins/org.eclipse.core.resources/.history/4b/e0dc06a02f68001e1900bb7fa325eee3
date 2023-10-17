@@ -1,0 +1,66 @@
+package UITests;
+
+import java.time.Duration;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.testng.annotations.Test;
+
+import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.Status;
+
+public class OTPUITest extends LoginUITest{
+	
+	 @Test(priority = 7)
+		public void otpTextbox() throws InterruptedException {
+			ExtentTest test7 = extent.createTest("otpTextbox Test").assignAuthor("Darshan").assignCategory("UI Test").assignDevice("Android");
+			test7.log(Status.INFO, "OTP Page Displayed");
+
+			driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
+			WebElement  otpTextbox = driver.findElement(By.xpath("com.asset.management:id/edtxt1"));
+			if (otpTextbox.isDisplayed()) {
+				System.out.println("Otp text box is dislayed");
+				Thread.sleep(500);
+			}else {
+				System.out.println("Otp text box is not dislayed");
+			}	
+			if (otpTextbox.isEnabled()) {
+				System.out.println("Otp text box is Enabled");
+				Thread.sleep(500);
+				otpTextbox.sendKeys("1");
+			}else {
+				System.out.println("Otp text box is not Enabled");
+			}		
+			test7.pass("Otp text box verified successfully");
+			
+			driver.findElement(By.id("com.asset.management:id/edtxt2")).sendKeys("2");
+			Thread.sleep(500);
+			driver.findElement(By.id("com.asset.management:id/edtxt3")).sendKeys("3");
+			Thread.sleep(500);
+			driver.findElement(By.id("com.asset.management:id/edtxt4")).sendKeys("4");
+	  }
+	 
+	 @Test(priority = 8)
+		public void submitBtn() throws InterruptedException {
+			ExtentTest test8 = extent.createTest("submitBtn Test").assignAuthor("Darshan").assignCategory("UI Test").assignDevice("Android");
+			test8.log(Status.INFO, "OTP Page Displayed");
+
+			driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+			WebElement  submitBtn = driver.findElement(By.id("com.asset.management:id/submit_btn"));
+			if (submitBtn.isDisplayed()) {
+				System.out.println("Submit button is dislayed");
+				Thread.sleep(500);
+			}else {
+				System.out.println("Submit button is not dislayed");
+			}	
+			if (submitBtn.isEnabled()) {
+				System.out.println("Submit button is Enabled");
+				Thread.sleep(500);
+				submitBtn.click();
+			}else {
+				System.out.println("Submit button is not Enabled");
+			}		
+			test8.pass("Submit button verified successfully");
+	  }
+  
+}

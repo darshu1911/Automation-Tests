@@ -1,0 +1,110 @@
+package tests;
+
+import org.openqa.selenium.By;
+import org.testng.annotations.Test;
+
+import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.Status;
+
+public class ResourceTests extends CreateAssetTest{
+	
+	@Test(priority = 5)
+	public void AddResource() throws InterruptedException{
+		ExtentTest test5 = extent.createTest("AddResource Test").assignAuthor("Darshan").assignCategory("Functional Test").assignDevice("Android");
+		test5.log(Status.INFO, "Add resource Page Displayed");
+		Thread.sleep(5000);
+		driver.findElement(By.id("com.asset.management:id/fragment_resource")).click();
+		Thread.sleep(200);
+		driver.findElement(By.id("com.asset.management:id/addResourceButton")).click();
+		Thread.sleep(200);
+		driver.findElement(By.id("com.asset.management:id/fullNameBox")).sendKeys("Darshan");
+		Thread.sleep(200);
+		driver.findElement(By.id("com.asset.management:id/emailIdBox")).sendKeys("madhu.hari@gmail.com");
+		Thread.sleep(200);
+		driver.findElement(By.id("com.asset.management:id/phoneNoBox")).sendKeys("9855678909");
+		test5.log(Status.PASS, "All fields entered");
+		driver.findElement(By.id("com.asset.management:id/addAssignerToDb")).click();
+		Thread.sleep(500);
+		driver.findElement(By.id("com.asset.management:id/chooseValideDate")).click();
+		Thread.sleep(500);
+		driver.findElement(By.id("com.asset.management:id/fullNameBox")).sendKeys("Madhu");
+		Thread.sleep(500);
+		driver.findElement(By.id("com.asset.management:id/addAssignerToDb")).click();
+		Thread.sleep(1000);
+		driver.findElement(By.id("com.asset.management:id/fragment_home")).click();
+
+		test5.log(Status.PASS, "Resource is added");
+		test5.pass("User Added Resource");
+		System.out.println("Resource is added succesfully");
+	}
+
+	@Test(priority = 6)
+	public void AssignAsset() throws InterruptedException{
+		ExtentTest test6 = extent.createTest("AssignAsset Test").assignAuthor("Darshan").assignCategory("Functional Test").assignDevice("Android");
+		test6.log(Status.INFO, "Asset Details Page Displayed");
+		Thread.sleep(3000);
+		driver.findElement(By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.view.ViewGroup/androidx.viewpager.widget.ViewPager/androidx.recyclerview.widget.RecyclerView/android.widget.FrameLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.LinearLayout/androidx.recyclerview.widget.RecyclerView/android.widget.GridLayout[3]/android.view.ViewGroup")).click();
+		Thread.sleep(200);
+		driver.findElement(By.id("com.asset.management:id/go_next1")).click();
+		Thread.sleep(200);
+		driver.findElement(By.id("com.asset.management:id/assignerName")).click();
+		Thread.sleep(200);
+		driver.findElement(By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.LinearLayout/androidx.recyclerview.widget.RecyclerView/android.view.ViewGroup[6]/android.widget.TextView")).click();
+		Thread.sleep(600);
+		driver.findElement(By.id("com.asset.management:id/assignDateImg")).click();
+		Thread.sleep(200);
+		driver.findElement(By.xpath("//android.view.View[@content-desc=\"01 August 2023\"]")).click();
+		Thread.sleep(200);
+		driver.findElement(By.id("android:id/button1")).click();
+		test6.log(Status.PASS, "All fields entered");
+		driver.findElement(By.id("com.asset.management:id/btn_Assign")).click();
+
+		test6.log(Status.PASS, "Asset assigned Succesfully");
+		test6.pass("User assigned asset to resource");
+
+		System.out.println("Asset assigned Succesfully");
+	}
+	
+	@Test(priority = 7)
+	public void EditAssignAsset() throws InterruptedException{
+		ExtentTest test7 = extent.createTest("EditAssignAsset Test").assignAuthor("Darshan").assignCategory("Functional Test").assignDevice("Android");
+		test7.log(Status.INFO, "Assigned to page Displayed");
+		Thread.sleep(1000);
+		driver.findElement(By.id("com.asset.management:id/editAssignTo")).click();
+		Thread.sleep(200);
+		driver.findElement(By.id("com.asset.management:id/assignDateImg")).click();
+		Thread.sleep(200);
+		driver.findElement(By.xpath("//android.view.View[@content-desc=\"17 August 2023\"]")).click();
+		Thread.sleep(200);
+		driver.findElement(By.id("android:id/button1")).click();
+		Thread.sleep(200);
+		driver.findElement(By.id("com.asset.management:id/updateAssign")).click();
+		test7.log(Status.PASS, "All fields entered");
+
+		test7.log(Status.PASS, "Assign edited Succesfully");
+		test7.pass("User edited assign");
+		System.out.println("Assign edited Succesfully");
+
+	}
+	
+	@Test(priority = 8)
+	public void RevokeAssign() throws InterruptedException{
+		ExtentTest test8 = extent.createTest("RevokeAssign Test").assignAuthor("Darshan").assignCategory("Functional Test").assignDevice("Android");
+		test8.log(Status.INFO, "Assigned to Page Displayed");
+		Thread.sleep(1000);
+		driver.findElement(By.id("com.asset.management:id/revoke_Assign")).click();
+		Thread.sleep(200);
+		driver.findElement(By.id("com.asset.management:id/revoke_dialog")).click();
+		test8.log(Status.PASS, "Assign revoked Succesfully");
+		test8.pass("User revoked assign");
+		System.out.println("Assign revoked Succesfully");
+
+		driver.findElement(By.id("com.asset.management:id/backButtonAssign")).click();
+		Thread.sleep(200);
+
+		test8.pass("User Navigated to asset details page");
+		System.out.println("Navigated to asset details page succesfully");
+
+	}
+
+}

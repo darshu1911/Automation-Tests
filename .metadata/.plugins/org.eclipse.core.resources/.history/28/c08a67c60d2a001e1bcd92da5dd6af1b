@@ -1,0 +1,63 @@
+package com.astra;
+
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.concurrent.TimeUnit;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.remote.DesiredCapabilities;
+
+import io.appium.java_client.AppiumDriver;
+
+
+public class AsTraTest {
+
+	static AppiumDriver driver;
+	static String EMAIL_ID = "akshay.kumar@synclovis.com";
+
+	public static void main(String[] args) {
+
+		try {
+			openAsTraApp();
+		} catch (Exception e) {
+			System.out.println(e.getCause());
+			System.out.println(e.getMessage());
+			e.printStackTrace();
+		}
+	}
+
+
+	public static void openAsTraApp() throws InterruptedException{
+
+		DesiredCapabilities cap = new DesiredCapabilities();
+		cap.setCapability("deviceName", "Redmi Note 8 Pro");
+		cap.setCapability("udid", "prinibpzrgtgwcz9");
+		cap.setCapability("platformName", "Android");
+		cap.setCapability("platformVersion", "11");
+		cap.setCapability("appPackage", "com.asset.management");
+		cap.setCapability("appActivity", "com.asset.management.SplashActivity");
+
+		URL url;
+		try {
+			url = new URL("http://127.0.0.1:4723/wd/hub");
+			driver = new AppiumDriver(url, cap);
+		} catch (MalformedURLException e) {
+
+			e.printStackTrace();
+		}
+
+		System.out.println("Application Started Succesfully");	
+		Thread.sleep(1000);
+		driver.findElement(By.id("com.asset.management:id/next")).click();
+		Thread.sleep(1000);
+		driver.findElement(By.id("com.asset.management:id/emailId")).sendKeys("EMAIL_ID");
+		Thread.sleep(1000);
+		driver.findElement(By.id("com.asset.management:id/sent_otp_btn")).click();
+		Thread.sleep(1000);
+		driver.findElement(By.id("")).sendKeys("1234");
+		Thread.sleep(1000);
+		driver.findElement(By.id("com.asset.management:id/submit_btn")).click();
+
+
+	}
+}

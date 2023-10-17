@@ -1,0 +1,69 @@
+package tests;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.testng.annotations.Test;
+
+import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.Status;
+
+public class DashboardUITests extends LoginTest {
+
+
+	@Test(priority = 11)
+	public void TitleTests() throws InterruptedException {
+		ExtentTest test11 = extent.createTest("ValidNo Test").assignAuthor("Darshan").assignDevice("Android").assignCategory("UI Test");
+		test11.log(Status.INFO, "OTP Screen Displayed");
+
+		Thread.sleep(8000);
+		WebElement  drawer = driver.findElement(By.xpath("//android.widget.TextView[@text = 'Classes']"));
+		if (drawer.isDisplayed()) {
+			System.out.println("Drawer icon is dislayed");
+			Thread.sleep(500);
+		}else {
+			System.out.println("Drawer icon is not dislayed");
+		}	
+		if (drawer.isEnabled()) {
+			System.out.println("Drawer icon is Enabled");
+			Thread.sleep(500);
+		}else {
+			System.out.println("Drawer icon is not Enabled");
+		}
+		Thread.sleep(500);
+		WebElement  Classes = driver.findElement(By.xpath("//android.widget.TextView[@text = 'Classes']"));
+		if (Classes.isDisplayed()) {
+			System.out.println(" Classes title is dislayed");
+			Thread.sleep(500);
+		}else {
+			System.out.println(" Classes title is not dislayed");
+		}	
+		if (Classes.isEnabled()) {
+			System.out.println(" Classes title is Enabled");
+			Thread.sleep(500);
+		}else {
+			System.out.println(" Classes title is not Enabled");
+		}	
+		Thread.sleep(500);
+		WebElement  classView = driver.findElement(By.id("classView"));
+		if (classView.isDisplayed()) {
+			System.out.println(" ClassView icon is dislayed");
+			Thread.sleep(500);
+		}else {
+			System.out.println(" ClassView icon is not dislayed");
+		}	
+		if (classView.isEnabled()) {
+			System.out.println(" ClassView icon is Enabled");
+			Thread.sleep(500);
+			classView.click();
+		}else {
+			System.out.println(" ClassView icon is not Enabled");
+		}
+
+
+
+
+
+		test11.log(Status.PASS, "OTP Screen Displayed");
+		System.out.println("Succesfully OTP field tested with valid OTP");
+	}
+}

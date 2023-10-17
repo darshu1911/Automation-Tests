@@ -1,0 +1,69 @@
+package tests;
+
+import org.openqa.selenium.By;
+import org.testng.annotations.Test;
+
+import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.Status;
+
+public class ProfileTest extends LoginTest{
+	
+
+
+	@Test(priority = 8)
+	public void EditProfile() throws InterruptedException{
+		ExtentTest test8 = extent.createTest("EditProfile Test").assignAuthor("Darshan").assignCategory("Functional Test").assignDevice("Android");
+		test8.log(Status.INFO, "Profile Page Displayed");
+		Thread.sleep(1000);
+		driver.findElement(By.id("com.asset.management:id/userProfile")).click();
+		driver.findElement(By.id("com.asset.management:id/myPro")).click();
+		driver.findElement(By.id("com.asset.management:id/editFirstName")).sendKeys("Akshay J");
+		test8.log(Status.PASS, "First Name Edited");
+		driver.findElement(By.id("com.asset.management:id/editLast")).sendKeys("Kumar");
+		test8.log(Status.PASS, "Last Name Edited");
+		driver.findElement(By.id("com.asset.management:id/update")).click();
+
+
+		test8.log(Status.PASS, "Profile updated succesfully");
+		test8.pass("User name is updated");
+		System.out.println("Profile updated succesfully");
+	}
+
+	@Test(priority = 9)
+	public void FAQHELP() throws InterruptedException{
+		ExtentTest test9 = extent.createTest("FAQHELP Test").assignAuthor("Darshan").assignCategory("Functional Test").assignDevice("Android");
+		test9.log(Status.INFO, "Profile Page Displayed");
+		Thread.sleep(1000);
+		driver.findElement(By.id("com.asset.management:id/fAQ")).click();
+		driver.findElement(By.id("com.asset.management:id/tellUs")).click();
+		driver.findElement(By.id("com.asset.management:id/tellUs")).click();
+		driver.findElement(By.id("com.asset.management:id/reportTextBox")).sendKeys("In maintainence component some isssues are there please check");
+		test9.log(Status.PASS, "I Entered Problem");
+		driver.findElement(By.id("com.asset.management:id/reportProblem")).click();
+		driver.findElement(By.id("com.asset.management:id/backButtonHelpCenter")).click();
+		
+		test9.log(Status.PASS, "Report is Submitted");
+		test9.pass("User name is updated");
+		System.out.println("Profile updated succesfully");
+	}
+
+	@Test(priority = 20)
+	public void Logout() throws InterruptedException{
+		ExtentTest test20 = extent.createTest("Logout Test").assignAuthor("Darshan").assignCategory("Functional Test").assignDevice("Android");
+		test20.log(Status.INFO, "Profile Page Displayed");
+		Thread.sleep(1000);
+		driver.findElement(By.id("com.asset.management:id/proLogout")).click();	
+		test20.log(Status.PASS, "Logout Succesfully");
+		test20.pass("User Logged Out");
+		
+		System.out.println("User Logged Out Succesfully");
+	}
+}
+
+
+
+
+
+
+
+//com.asset.management:id/resentOtp

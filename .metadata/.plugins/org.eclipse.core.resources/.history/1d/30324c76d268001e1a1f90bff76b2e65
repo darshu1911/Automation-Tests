@@ -1,0 +1,43 @@
+package tests;
+
+import org.openqa.selenium.By;
+import org.testng.annotations.Test;
+
+import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.Status;
+
+public class MaintainenceTest extends ResourceTests {
+	
+	
+	@Test(priority = 7)
+	public void AddMaintainence() throws InterruptedException{
+		ExtentTest test7 = extent.createTest("AddMaintainence Test").assignAuthor("Darshan").assignCategory("Functional Test").assignDevice("Android");
+		test7.log(Status.INFO, "Asset Details Page Displayed");
+		Thread.sleep(1000);
+		driver.findElement(By.id("com.asset.management:id/maintenance")).click();
+		Thread.sleep(500);
+		driver.findElement(By.id("com.asset.management:id/firstEmptyAddAsset")).click();
+		//		Thread.sleep(500);
+		//		driver.findElement(By.id("com.android.permissioncontroller:id/permission_allow_foreground_only_button")).click();
+		Thread.sleep(500);
+		driver.findElement(By.id("com.asset.management:id/selectMaintenanceDaTE")).click();
+		Thread.sleep(500);
+		driver.findElement(By.xpath("//android.view.View[@content-desc=\"02 August 2023\"]")).click();	
+		Thread.sleep(500);
+		driver.findElement(By.id("android:id/button1")).click();
+		Thread.sleep(200);
+		driver.findElement(By.id("com.asset.management:id/selectMaintenance")).click();
+		Thread.sleep(8000);
+		driver.findElement(By.id("com.asset.management:id/enterMaintenanceAmount")).sendKeys("25");
+		Thread.sleep(500);
+		driver.findElement(By.id("com.asset.management:id/descriptionTextBox")).sendKeys("idsjysadughhsfdhsakfkfsa svhjgsafsahkjfsa");
+		Thread.sleep(500);
+		driver.findElement(By.id("com.asset.management:id/btn_create")).click();
+
+
+		test7.log(Status.PASS, "Invoice Added succeslfully");
+		test7.pass("User added invoice");
+
+		System.out.println("Invoice Added succeslfully");
+	}
+}

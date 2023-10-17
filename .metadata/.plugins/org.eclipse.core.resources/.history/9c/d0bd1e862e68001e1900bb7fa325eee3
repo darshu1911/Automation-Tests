@@ -1,0 +1,91 @@
+package UITests;
+
+import java.time.Duration;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.testng.annotations.Test;
+
+import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.Status;
+
+public class WalkthroughUITests extends AstraTest{
+
+
+	@Test(priority = 1)
+	public void skipBtn() throws InterruptedException {
+		ExtentTest test1 = extent.createTest("skipBtn Test").assignAuthor("Darshan").assignCategory("UI Test").assignDevice("Android");
+		test1.log(Status.INFO, "Astra App Opened ");
+
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
+		WebElement  skipBtn = driver.findElement(By.id("com.asset.management:id/skip"));
+		if (skipBtn.isDisplayed()) {
+			System.out.println("Skip button icon is dislayed");
+			Thread.sleep(500);
+		}else {
+			System.out.println("Skip button icon is not dislayed");
+		}	
+		if (skipBtn.isEnabled()) {
+			System.out.println("Skip button icon is Enabled");
+			Thread.sleep(500);
+			//			skipBtn.click();
+		}else {
+			System.out.println("Skip button icon is not Enabled");
+		}
+		test1.log(Status.PASS, "Skip button verified successfully");
+		//		test1.pass("Skip button verified successfully");
+	}
+	
+	@Test(priority = 2)
+	public void nextIcon() throws InterruptedException {
+		ExtentTest test1 = extent.createTest("nextIcon Test").assignAuthor("Darshan").assignCategory("UI Test").assignDevice("Android");
+		test1.log(Status.INFO, "Astra App Opened ");	
+		
+		WebElement  nextIcon = driver.findElement(By.id("com.asset.management:id/next"));
+		if (nextIcon.isDisplayed()) {
+			System.out.println("Next button icon is dislayed");
+			Thread.sleep(500);
+		}else {
+			System.out.println("Next button icon is not dislayed");
+		}	
+		if (nextIcon.isEnabled()) {
+			System.out.println("Next button icon is Enabled");
+			Thread.sleep(500);
+			nextIcon.click();
+			test1.pass("Successfully navigated to 2nd walkthrough screen");
+			
+			Thread.sleep(500);
+			nextIcon.click();
+			test1.pass("Successfully navigated to last walkthrough screen");
+			
+		}else {
+			System.out.println("Next button icon is not Enabled");
+		}	
+		test1.pass("Next button verified successfully");
+	}
+	
+	@Test(priority = 3)
+	public void getStartedbtn() throws InterruptedException {
+		ExtentTest test1 = extent.createTest("getStartedbtn Test").assignAuthor("Darshan").assignCategory("UI Test").assignDevice("Android");
+		test1.log(Status.INFO, "Astra App Opened ");	
+	
+		WebElement  getStartedbtn = driver.findElement(By.id("com.asset.management:id/next1"));
+		if (getStartedbtn.isDisplayed()) {
+			System.out.println("Get started button is dislayed");
+			Thread.sleep(500);
+		}else {
+			System.out.println("Get started button is not dislayed");
+		}	
+		if (getStartedbtn.isEnabled()) {
+			System.out.println("Get started button is Enabled");
+			Thread.sleep(500);
+			getStartedbtn.click();
+
+		}else {
+			System.out.println("Get started button is not Enabled");	
+		}
+		test1.pass("Get started button verified successfully");
+		test1.pass("Successfully navigated to home screen");
+	}
+
+}

@@ -1,0 +1,165 @@
+package tests;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.testng.annotations.Test;
+
+import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.Status;
+
+public class LoginTest extends UITests{
+	static String MobileNO = "9845649870";
+	static String OTP = "889133";
+
+  @Test(priority = 5)
+  public void EmptyNo() throws InterruptedException {
+	  ExtentTest test5 = extent.createTest("EmptyNo Test").assignAuthor("Darshan").assignDevice("Android").assignCategory("UI Test");
+		test5.log(Status.INFO, "Login Page Displayed");
+
+		Thread.sleep(500);
+		driver.findElement(By.xpath("//android.widget.TextView[@text = 'PROCEED']")).click();
+		Thread.sleep(500);
+		WebElement  Alert = driver.findElement(By.xpath("//android.widget.Button[@text = 'OK']"));
+		if (Alert.isDisplayed()) {
+			System.out.println(" Alert message is dislayed");
+			Thread.sleep(500);
+			
+			Alert.click();
+		}else {
+			System.out.println(" Alert message is not dislayed");
+		}
+		
+		test5.log(Status.PASS, "Alert message Message Displayed");
+		System.out.println("Succesfully Mobile number field tested with empty number");  
+  }
+  
+  @Test(priority = 6)
+  public void InvalidNo() throws InterruptedException {
+	  ExtentTest test6 = extent.createTest("InvalidNo Test").assignAuthor("Darshan").assignDevice("Android").assignCategory("Functional Test");
+		test6.log(Status.INFO, "Login Page Displayed");
+
+		Thread.sleep(500);
+		driver.findElement(By.xpath("//android.widget.EditText[@resource-id = 'mobileNumber']")).sendKeys("1243273364");
+		Thread.sleep(500);
+		driver.findElement(By.xpath("//android.widget.TextView[@text = 'PROCEED']")).click();
+		Thread.sleep(3000);
+		WebElement  Alert = driver.findElement(By.xpath("//android.widget.Button[@text = 'OK']"));
+		if (Alert.isDisplayed()) {
+			System.out.println(" Alert message is dislayed");
+			Thread.sleep(500);
+			Alert.click();
+		}else {
+			System.out.println(" Alert message is not dislayed");
+		}
+		
+		test6.log(Status.PASS, "Alert message Message Displayed");
+		System.out.println("Succesfully Mobile number field tested with invalid number");
+	  
+  }
+  
+  @Test(priority = 7)
+  public void ValidNo() throws InterruptedException {
+	  ExtentTest test7 = extent.createTest("ValidNo Test").assignAuthor("Darshan").assignDevice("Android").assignCategory("Functional Test");
+		test7.log(Status.INFO, "Login Page Displayed");
+
+		Thread.sleep(500);
+		driver.findElement(By.xpath("//android.widget.EditText[@resource-id = 'mobileNumber']")).sendKeys(MobileNO);
+		Thread.sleep(500);
+		driver.findElement(By.xpath("//android.widget.TextView[@text = 'PROCEED']")).click();
+		
+		test7.log(Status.PASS, "OTP Screen Displayed");
+		System.out.println("Succesfully Mobile number field tested with valid number");
+	  
+  }
+  
+  @Test(priority = 8)
+  public void EmptyOTP() throws InterruptedException {
+	  ExtentTest test8 = extent.createTest("ValidNo Test").assignAuthor("Darshan").assignDevice("Android").assignCategory("Functional Test");
+		test8.log(Status.INFO, "OTP Screen Displayed");
+
+		Thread.sleep(2000);
+		WebElement OTP = driver.findElement(By.xpath("//android.widget.EditText[@resource-id = 'otp']"));
+		if (OTP.isDisplayed()) {
+			System.out.println(" OTP field is dislayed");			
+		}else {
+			System.out.println(" OTP field is Not dislayed");
+		}
+		Thread.sleep(500);
+		WebElement VerifyBtn = driver.findElement(By.xpath("//android.widget.TextView[@text = 'VERIFY']"));
+		if (VerifyBtn.isDisplayed()) {
+			System.out.println("Verify Button is dislayed");
+			Thread.sleep(500);
+		}else {
+			System.out.println("Verify Button is not dislayed");
+		}
+		if (VerifyBtn.isEnabled()) {
+			System.out.println("Verify Button is Enabled");
+			Thread.sleep(500);
+			VerifyBtn.click();
+		}else {
+			System.out.println("Verify Button is not Enabled");
+		}
+		Thread.sleep(1000);
+		WebElement  Alert = driver.findElement(By.xpath("//android.widget.Button[@text = 'OK']"));
+		if (Alert.isDisplayed()) {
+			System.out.println(" Alert message is dislayed");
+			Thread.sleep(500);
+			Alert.click();
+		}else {
+			System.out.println(" Alert message is not dislayed");
+		}
+		
+		test8.log(Status.PASS, "OTP Screen Displayed");
+		System.out.println("Succesfully OTP field tested with Empty OTP");
+	  
+  }
+  
+  @Test(priority = 9)
+  public void InValidOTP() throws InterruptedException {
+	  ExtentTest test9 = extent.createTest("InValidOTP Test").assignAuthor("Darshan").assignDevice("Android").assignCategory("Functional Test");
+		test9.log(Status.INFO, "OTP Screen Displayed");
+
+		Thread.sleep(2000);
+		driver.findElement(By.xpath("//android.widget.EditText[@index = '0']")).sendKeys("85975");	
+		Thread.sleep(200);
+		driver.findElement(By.xpath("//android.widget.TextView[@text = 'VERIFY']")).click();
+		Thread.sleep(1000);
+		WebElement  Alert = driver.findElement(By.xpath("//android.widget.Button[@text = 'OK']"));
+		if (Alert.isDisplayed()) {
+			System.out.println(" Alert message is dislayed");
+			Thread.sleep(500);
+			Alert.click();
+		}else {
+			System.out.println(" Alert message is not dislayed");
+		}
+
+		test9.log(Status.PASS, "OTP Screen Displayed");
+		System.out.println("Succesfully OTP field tested with Invalid OTP");
+	  
+  }
+  
+  @Test(priority = 10)
+  public void ValidOTP() throws InterruptedException {
+	  ExtentTest test10 = extent.createTest("ValidNo Test").assignAuthor("Darshan").assignDevice("Android").assignCategory("Functional Test");
+		test10.log(Status.INFO, "OTP Screen Displayed");
+
+		Thread.sleep(2000);
+		driver.findElement(By.xpath("//android.widget.EditText[@index = '0']")).sendKeys("8");	
+		Thread.sleep(200);		
+		driver.findElement(By.xpath("//android.widget.EditText[@index = '1']")).sendKeys("8");	
+		Thread.sleep(200);		
+		driver.findElement(By.xpath("//android.widget.EditText[@index = '2']")).sendKeys("9");	
+		Thread.sleep(200);		
+		driver.findElement(By.xpath("//android.widget.EditText[@index = '3']")).sendKeys("1");	
+		Thread.sleep(200);		
+		driver.findElement(By.xpath("//android.widget.EditText[@index = '4']")).sendKeys("3");	
+		Thread.sleep(200);		
+		driver.findElement(By.xpath("//android.widget.EditText[@index = '5']")).sendKeys("3");	
+		Thread.sleep(200);
+		driver.findElement(By.xpath("//android.widget.TextView[@text = 'VERIFY']")).click();
+
+		test10.log(Status.PASS, "OTP Screen Displayed");
+		System.out.println("Succesfully OTP field tested with valid OTP");
+	  
+  }
+}

@@ -1,0 +1,143 @@
+package tests;
+
+import static org.testng.Assert.assertEquals;
+
+import org.openqa.selenium.By;
+import org.testng.annotations.Test;
+
+import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.Status;
+
+public class LoginTest extends AstraTest{
+
+
+	@Test(priority = 1)
+	public void SkipWalkthrough() throws InterruptedException{
+		ExtentTest test1 = extent.createTest("SkipWalkthrough Test").assignAuthor("Darshan").assignCategory("Smoke Test").assignDevice("Android");
+		test1.log(Status.INFO, "Astra App Opened ");
+
+		Thread.sleep(3000);
+		driver.findElement(By.id("com.asset.management:id/next")).click();
+		driver.findElement(By.id("com.asset.management:id/next")).click();
+		Thread.sleep(500);
+		driver.findElement(By.id("com.asset.management:id/next1")).click();
+		test1.pass("User Skipped Walkthrough Screens ");
+
+		System.out.println("Skipped Walkthrough screens");
+	}
+
+	@Test(priority = 2)
+	public void LoginWithEmptyMail() throws InterruptedException{
+		ExtentTest test2 = extent.createTest("LoginWithEmptyMail Test").assignAuthor("Darshan").assignCategory("Smoke Test").assignDevice("Android");
+		test2.log(Status.INFO, "Login page Opened Succesfully ");
+
+		Thread.sleep(2000);
+		driver.findElement(By.id("com.asset.management:id/sent_otp_btn")).click();
+		String toastMessage = driver.findElement(By.xpath("//android.widget.Toast")).getAttribute("name");
+		assertEquals(toastMessage, "Enter your Email");
+		test2.log(Status.PASS, "Toast Message Verified");
+		test2.pass("Email Field verified without Email ");
+
+		System.out.println("Succesfully Email field tested with empty mail");
+	}
+
+	@Test(priority = 3)
+	public void LoginWithInValidMail() throws InterruptedException{
+		ExtentTest test3 = extent.createTest("LoginWithInValidMail Test").assignAuthor("Darshan").assignCategory("Smoke Test").assignDevice("Android");
+		test3.log(Status.INFO, "Login page Opened Succesfully");
+
+		Thread.sleep(1000);
+		driver.findElement(By.id("com.asset.management:id/emailId")).sendKeys("EMAIL_ID");
+		Thread.sleep(1000);
+		driver.findElement(By.id("com.asset.management:id/sent_otp_btn")).click();
+		Thread.sleep(1000);
+		driver.findElement(By.id("com.asset.management:id/tryAgain")).click();
+		Thread.sleep(1000);
+		test3.log(Status.PASS, "Error Popup Displayed");
+		test3.pass("Verified with Invalid Mail ID ");
+
+		System.out.println("Succesfully Email field tested with invalid mail");
+	}
+
+	@Test(priority = 4)
+	public void LoginWithValidMail() throws InterruptedException{
+		ExtentTest test4 = extent.createTest("LoginWithValidMail Test").assignAuthor("Darshan").assignCategory("Smoke Test").assignDevice("Android");
+		test4.log(Status.INFO, "Login page Opened Succesfully ");
+
+		Thread.sleep(1000);
+		driver.findElement(By.id("com.asset.management:id/emailId")).sendKeys(EMAIL_ID);
+		Thread.sleep(1000);
+		driver.findElement(By.id("com.asset.management:id/sent_otp_btn")).click();
+		Thread.sleep(1000);
+		test4.log(Status.PASS, "Succesfully Navigated to OTP screen");
+		test4.pass("Verified with Valid Mail ID ");
+
+		System.out.println("Succesfully Email Field Varified");
+	}
+
+	@Test(priority = 5)
+	public void LoginWithEmptyOTP() throws InterruptedException{
+		ExtentTest test5 = extent.createTest("LoginWithEmptyOTP Test").assignAuthor("Darshan").assignCategory("Functional Test").assignDevice("Android");
+		test5.log(Status.INFO, "OTP Screen Displayed");
+
+		Thread.sleep(1000);
+		driver.findElement(By.id("com.asset.management:id/submit_btn")).click();
+		String toastMessage = driver.findElement(By.xpath("//android.widget.Toast")).getAttribute("name");
+		assertEquals(toastMessage, "Enter OiTP");
+
+		test5.log(Status.PASS, "Error Toast Message Verifyed");
+		test5.pass("Verified with empty OTP");
+
+		System.out.println("Succesfully Verified with empty OTP");
+	}
+
+	//	@Test(priority = 6)
+	//	public void LoginWithInValidOTPTest() throws InterruptedException{
+	//
+	//		ExtentTest test6 = extent.createTest("LoginWithInValidOTPTest Test").assignAuthor("Darshan").assignCategory("Functional Test").assignDevice("Android");
+	//		test6.log(Status.INFO, "OTP Screen Displayed");
+	//
+	//		Thread.sleep(1000);
+	//		driver.findElement(By.id("com.asset.management:id/edtxt1")).sendKeys("1");
+	//		driver.findElement(By.id("com.asset.management:id/edtxt2")).sendKeys("2");
+	//		driver.findElement(By.id("com.asset.management:id/edtxt3")).sendKeys("3");
+	//		driver.findElement(By.id("com.asset.management:id/edtxt4")).sendKeys("3");
+	//		driver.findElement(By.id("com.asset.management:id/submit_btn")).click();
+	//		Thread.sleep(3000);
+	//		driver.findElement(By.id("com.asset.management:id/tryAgain")).click();
+	//		test6.log(Status.PASS, "Error Popup Displayed");
+	//		test6.pass("Verified With Invalid OTP");
+	//
+	//		System.out.println("Invalid OTP verified succesfully");
+	//	}	
+
+	@Test(priority = 6)
+	public void ValidOTPTest() throws InterruptedException{
+
+		ExtentTest test6 = extent.createTest("ValidOTPTest Test").assignAuthor("Darshan").assignCategory("Functional Test").assignDevice("Android");
+		test6.log(Status.INFO, "OTP page Displayed ");
+
+		Thread.sleep(3000);
+		driver.findElement(By.id("com.asset.management:id/edtxt1")).sendKeys("1");
+		driver.findElement(By.id("com.asset.management:id/edtxt2")).sendKeys("2");
+		driver.findElement(By.id("com.asset.management:id/edtxt3")).sendKeys("3");
+		driver.findElement(By.id("com.asset.management:id/edtxt4")).sendKeys("4");
+		Thread.sleep(1000);
+		driver.findElement(By.id("com.asset.management:id/submit_btn")).click();
+		
+		test6.log(Status.PASS, "Logged In Succesfully");
+		test6.pass("Verified With valid OTP");
+
+		System.out.println("Logged In Succesfully");
+	}
+
+
+
+}
+
+
+
+
+
+
+

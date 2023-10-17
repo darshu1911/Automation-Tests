@@ -1,0 +1,9 @@
+package UITests;
+
+import org.testng.annotations.Test;
+
+public class HomeUITests {
+  @Test
+  public void f() {
+  }
+}

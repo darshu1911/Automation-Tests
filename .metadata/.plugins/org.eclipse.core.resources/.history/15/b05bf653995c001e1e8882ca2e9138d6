@@ -1,0 +1,207 @@
+package MyCLNQ_Provider.com;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.Assert;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Test;
+
+public class MyCLNQ_Provider {
+	//WebDriver driver;
+	static WebDriver driver;
+//	static Select select;
+	static String WEB_URL = "https://myclnq.co/stage/provider/#/";
+	static String USER_NAME = "Vikram_123";
+	static String PASS_WORD = "Vikram@1234";
+	static int sleepTimer = 3000;
+    @BeforeTest
+    public void Setup() 
+    {
+		System.setProperty("webdriver.chrome.driver", "C:\\Selenium\\chromedriver-win64\\chromedriver-win64\\chromedriver.exe");      
+		driver = new ChromeDriver();
+        driver.manage().window().maximize();
+      }
+  @Test
+  public void Myclnqappopen() {
+      String url = "https://myclnq.co/stage/provider/#/";
+      String expected = "MyCLNQ";
+      driver.get(url);
+      String actual = driver.getTitle();
+      Assert.assertEquals(actual, expected);
+    //Initializing selenium web driver.	
+	//Testing Clicking Doctor button.
+		clickDoctorBtn();		
+  }
+  @Test
+  public void clinicLoginTest() {
+      String url = "https://myclnq.co/stage/provider/#/";
+      driver.get(url);
+	
+      //Testing Clicking Doctor button.
+		clickClinicBtn();
+		
+	//Testing login using username and password.
+		Cliniclogin();
+
+  }
+  
+  @Test
+  public void generatemdcertificatetest() {
+      String url = "https://myclnq.co/stage/provider/#/";
+      driver.get(url);
+	
+      //Testing Clicking Doctor button.
+		clickClinicBtn();
+		
+	//Testing login using username and password.
+		Cliniclogin();
+	
+	//Testing login using username and password.
+		generatemdcertificateBtn();
+
+  }
+  @Test
+  public void doctorloginTest() {
+      String url = "https://myclnq.co/stage/provider/#/";
+      driver.get(url);
+      
+	//Testing Clicking Doctor button.
+		clickDoctorBtn();
+		
+	//Testing login using username and password.
+		Doctorlogin();
+
+  }
+  
+  @Test
+  public void createAppointmentTest() {
+      String url = "https://myclnq.co/stage/provider/#/";
+      driver.get(url);
+	
+      //Testing Clicking Doctor button.
+		clickDoctorBtn();
+		
+	//Testing login using username and password.
+		Doctorlogin();
+	
+	//Testing Clicking Appointment Menu button.
+		clickAppointmentMenuBtn();
+
+  }
+  
+  public static void sleep(int timer) {
+		try {
+			Thread.sleep(timer);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+	}
+	public static void clickDoctorBtn() {
+		
+			sleep(sleepTimer);
+			driver.findElement(By.xpath(MyCLNQ_Locator.DOCTOR_BTN_PATH)).click();	
+			System.out.println("Doctor BTN Clicked Successfully");
+			sleep(sleepTimer);
+	}
+	
+	public static void Doctorlogin() {
+		
+		sleep(sleepTimer);	
+		driver.findElement(By.xpath(MyCLNQ_Locator.USER_NAME_PATH)).sendKeys(USER_NAME);
+		sleep(sleepTimer);	
+		driver.findElement(By.xpath(MyCLNQ_Locator.PASS_WORD_PATH)).sendKeys(PASS_WORD);
+		driver.findElement(By.xpath(MyCLNQ_Locator.LOGIN_BTN_PATH)).click();	
+		System.out.println("Logined Successfully");
+		
+		}
+	
+	public static void clickAppointmentMenuBtn() {
+		
+		sleep(sleepTimer);
+		driver.findElement(By.xpath(MyCLNQ_Locator.APPOINTMENT_MENU_PATH)).click();	
+		sleep(sleepTimer);
+		driver.findElement(By.xpath(MyCLNQ_Locator.CREATE_APPOINTMENT_PATH)).click();
+		sleep(sleepTimer);
+		driver.findElement(By.xpath(MyCLNQ_Locator.NUMBER_PATH)).sendKeys("98087989");
+		sleep(sleepTimer);
+		driver.findElement(By.xpath(MyCLNQ_Locator.FIRSTNAME_PATH)).sendKeys("Adhi");				
+		sleep(sleepTimer);
+		driver.findElement(By.xpath(MyCLNQ_Locator.LASTNAME_PATH)).sendKeys("Raj");
+		sleep(sleepTimer);
+		driver.findElement(By.xpath(MyCLNQ_Locator.DOB_PATH)).sendKeys("22-06-1985");
+		sleep(sleepTimer);
+		driver.findElement(By.xpath(MyCLNQ_Locator.GENDER_PATH2)).click();
+		sleep(sleepTimer);
+		driver.findElement(By.xpath(MyCLNQ_Locator.ADDRESS_PATH)).sendKeys("20 Ang Mo Kio Industrial Park 2A 04-18");
+		sleep(sleepTimer);
+		driver.findElement(By.xpath(MyCLNQ_Locator.SYMPTOMS_PATH)).click();
+		sleep(sleepTimer);
+		driver.findElement(By.xpath(MyCLNQ_Locator.SCHEDULE_DATE_PATH)).sendKeys("07-06-2023");
+		sleep(sleepTimer);
+//		WebElement ddown = driver.findElement(By.xpath(MyCLNQ_Locator.HOUR_PATH));
+//		Select select = new Select(ddown);
+//		select.getOptions();
+		driver.findElement(By.xpath(MyCLNQ_Locator.SUBMIT_PATH)).click();
+		
+		System.out.println("Appointment created Successfully");
+}
+	@AfterTest
+	public void tearDown() {
+		driver.close();
+}
+	
+	public static void clickClinicBtn() {
+		
+		sleep(sleepTimer);
+		driver.findElement(By.xpath(CLINIC_LOCATOR.CLNIC_BTN_PATH)).click();	
+		System.out.println("Clinic BTN Clicked Successfully");
+}
+	
+	public static void Cliniclogin() {	
+	
+	sleep(sleepTimer);	
+	driver.findElement(By.xpath(CLINIC_LOCATOR.MobileNUMBER_PATH)).sendKeys("99012424");
+	sleep(sleepTimer);	
+	driver.findElement(By.xpath(CLINIC_LOCATOR.Continue_Btn_Path)).click();	
+	sleep(sleepTimer);	
+	driver.findElement(By.xpath(CLINIC_LOCATOR.Otp_Input_Path1)).sendKeys("7207");
+	sleep(sleepTimer);	
+	driver.findElement(By.xpath(CLINIC_LOCATOR.Verify_Btn_Path)).click();	
+	System.out.println("Logined Successfully");
+	
+	}
+	
+	public static void generatemdcertificateBtn(){
+		sleep(sleepTimer);	
+		driver.findElement(By.xpath(CLINIC_LOCATOR.Appointments_Path)).click();
+		sleep(sleepTimer);	
+		driver.findElement(By.xpath(CLINIC_LOCATOR.Attend_Path)).click();
+		sleep(sleepTimer);	
+		driver.findElement(By.xpath(CLINIC_LOCATOR.Generate_Certificate_Path)).click();
+		sleep(sleepTimer);	
+		driver.findElement(By.xpath(CLINIC_LOCATOR.Certificat_Num_Path)).sendKeys("990122212424");
+		sleep(sleepTimer);	
+		driver.findElement(By.xpath(CLINIC_LOCATOR.Rmarks_Path)).sendKeys("99012424");
+		sleep(sleepTimer);	
+		driver.findElement(By.xpath(CLINIC_LOCATOR.FIN_Path)).sendKeys("99012424");
+		sleep(sleepTimer);	
+		driver.findElement(By.xpath(CLINIC_LOCATOR.Reference_Num_Path)).sendKeys("99012424");
+		sleep(sleepTimer);	
+		driver.findElement(By.xpath(CLINIC_LOCATOR.Used_For_Path2)).sendKeys("99012424");
+		sleep(sleepTimer);	
+		driver.findElement(By.xpath(CLINIC_LOCATOR.From_Path)).sendKeys("99012424");
+		sleep(sleepTimer);	
+		driver.findElement(By.xpath(CLINIC_LOCATOR.To_Path)).sendKeys("99012424");
+		sleep(sleepTimer);	
+		driver.findElement(By.xpath(CLINIC_LOCATOR.Cancel_Btn_Path)).sendKeys("99012424");
+		sleep(sleepTimer);	
+		driver.findElement(By.xpath(CLINIC_LOCATOR.Submit_Btn_Path)).sendKeys("99012424");
+
+	}
+	@AfterTest
+	public void tearDown1() {
+		driver.close();
+}
+}

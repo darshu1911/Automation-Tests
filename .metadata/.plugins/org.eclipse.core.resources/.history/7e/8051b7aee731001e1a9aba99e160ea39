@@ -1,0 +1,145 @@
+package tests;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.testng.annotations.Test;
+
+import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.Status;
+
+public class LoginTest extends AstraTest{
+
+	@Test(priority = 1)
+	public void LoginWithEmptyMail() throws InterruptedException{
+		ExtentTest test1 = extent.createTest("LoginWithEmptyMail Test").assignAuthor("Darshan").assignCategory("Smoke Test").assignDevice("Android");
+		test1.log(Status.INFO, "Astra App Opened ");
+
+		Thread.sleep(3000);
+		driver.findElement(By.id("com.asset.management:id/next")).click();
+		Thread.sleep(1000);
+		driver.findElement(By.id("com.asset.management:id/next")).click();
+		Thread.sleep(1000);
+		driver.findElement(By.id("com.asset.management:id/skip")).click();
+		Thread.sleep(1000);
+		test1.log(Status.PASS, "Navigated To Login Screen");
+		driver.findElement(By.id("com.asset.management:id/sent_otp_btn")).click();
+//		test1.log(Status.PASS, "Error Popup Displayed");
+		test1.pass("Email Field verified without Email ");
+
+		System.out.println("Skipped Walkthrough screens");
+		System.out.println("Email entered succesfully");
+		
+
+	}
+
+	@Test(priority = 2)
+	public void LoginWithWrongMail() throws InterruptedException{
+		ExtentTest test2 = extent.createTest("LoginWithWrongMail Test").assignAuthor("Darshan").assignCategory("Smoke Test").assignDevice("Android");
+		test2.log(Status.INFO, " ");
+
+		Thread.sleep(1000);
+		driver.findElement(By.id("com.asset.management:id/emailId")).sendKeys("EMAIL_ID");
+		Thread.sleep(1000);
+		driver.findElement(By.id("com.asset.management:id/sent_otp_btn")).click();
+		Thread.sleep(1000);
+		driver.findElement(By.id("com.asset.management:id/tryAgain")).click();
+		Thread.sleep(1000);
+		test2.log(Status.PASS, "Error Popup Displayed");
+		test2.pass("Verified with Invalid Mail ID ");
+
+		System.out.println("Skipped Walkthrough screens");
+		System.out.println("Email entered succesfully");
+
+	}
+
+	@Test(priority = 3)
+	public void LoginWithValidMail() throws InterruptedException{
+		ExtentTest test3 = extent.createTest("LoginWithValidMail Test").assignAuthor("Darshan").assignCategory("Smoke Test").assignDevice("Android");
+		test3.log(Status.INFO, "Login page Opened Succesfully ");
+
+		Thread.sleep(1000);
+		driver.findElement(By.id("com.asset.management:id/emailId")).sendKeys(EMAIL_ID);
+		Thread.sleep(1000);
+		driver.findElement(By.id("com.asset.management:id/sent_otp_btn")).click();
+		Thread.sleep(1000);
+		test3.log(Status.PASS, "Succesfully Navigated to OTP screen");
+		test3.pass("Verified with Invalid Mail ID ");
+
+		System.out.println("Skipped Walkthrough screens");
+		System.out.println("Email entered succesfully");
+
+	}
+
+	@Test(priority = 4)
+	public void LoginWithEmptyOTP() throws InterruptedException{
+		ExtentTest test4 = extent.createTest("LoginWithEmptyOTP Test").assignAuthor("Darshan").assignCategory("Functional Test").assignDevice("Android");
+		//		test4.log(Status.INFO, "Astra App Opened ");
+
+		Thread.sleep(1000);
+		driver.findElement(By.id("com.asset.management:id/submit_btn")).click();
+		test4.log(Status.PASS, "Error Popup Displayed");
+		test4.pass("Verified with empty OTP");
+
+
+		System.out.println("Skipped Walkthrough screens");
+		System.out.println("Email entered succesfully");
+
+	}
+
+	@Test(priority = 5)
+	public void LoginWithInValidOTPTest() throws InterruptedException{
+
+		ExtentTest test5 = extent.createTest("LoginWithInValidOTPTest Test").assignAuthor("Darshan").assignCategory("Functional Test").assignDevice("Android");
+		test5.log(Status.INFO, "Astra App Opened ");
+
+		Thread.sleep(1000);
+		driver.findElement(By.id("com.asset.management:id/edtxt1")).sendKeys("1");
+		Thread.sleep(500);
+		driver.findElement(By.id("com.asset.management:id/edtxt2")).sendKeys("2");
+		Thread.sleep(500);
+		driver.findElement(By.id("com.asset.management:id/edtxt3")).sendKeys("6");
+		Thread.sleep(500);
+		driver.findElement(By.id("com.asset.management:id/edtxt4")).sendKeys("4");
+		Thread.sleep(500);
+		driver.findElement(By.id("com.asset.management:id/submit_btn")).click();
+		Thread.sleep(3000);
+		driver.findElement(By.id("com.asset.management:id/tryAgain")).click();
+		test5.log(Status.PASS, "Error Popup Displayed");
+		test5.pass("Verified With Invalid OTP");
+
+	}	
+	@Test(priority = 6)
+	public void LoginWithValidOTPTest() throws InterruptedException{
+
+		ExtentTest test6 = extent.createTest("LoginWithValidOTPTest Test").assignAuthor("Darshan").assignCategory("Functional Test").assignDevice("Android");
+		test6.log(Status.INFO, "OTP page Displayed ");
+
+
+		Thread.sleep(3000);
+		driver.findElement(By.id("com.asset.management:id/edtxt1")).sendKeys("1");
+		Thread.sleep(1000);
+		driver.findElement(By.id("com.asset.management:id/edtxt2")).sendKeys("2");
+		Thread.sleep(1000);
+		driver.findElement(By.id("com.asset.management:id/edtxt3")).sendKeys("3");
+		Thread.sleep(1000);
+		driver.findElement(By.id("com.asset.management:id/edtxt4")).sendKeys("4");
+		Thread.sleep(1000);
+		driver.findElement(By.id("com.asset.management:id/submit_btn")).click();
+		test6.log(Status.PASS, "Logged In Succesfully");
+		test6.pass("Verified With valid OTP");
+
+
+		System.out.println("OTP entered succesfully");
+		System.out.println("Logged In Succesfully");
+
+	}
+
+
+
+}
+
+
+
+
+
+
